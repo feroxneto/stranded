@@ -21,15 +21,15 @@ namespace CleanArchitecture.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
-#if DEBUG
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseInMemoryDatabase("CleanArchitectureDb"));
-#else
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseInMemoryDatabase("CleanArchitectureDb"));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-#endif
+
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
@@ -53,11 +53,11 @@ namespace CleanArchitecture.Infrastructure
                         new TestUser
                         {
                             SubjectId = "f26da293-02fb-4c90-be75-e4aa51e0bb17",
-                            Username = "jason@clean-architecture",
-                            Password = "CleanArchitecture!",
+                            Username = "dev@techub.co.ao",
+                            Password = "2020!Dev",
                             Claims = new List<Claim>
                             {
-                                new Claim(JwtClaimTypes.Email, "jason@clean-architecture")
+                                new Claim(JwtClaimTypes.Email, "dev@techub.co.ao")
                             }
                         }
                     });

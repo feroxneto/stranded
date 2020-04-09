@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,31 @@ namespace CleanArchitecture.Infrastructure.Persistence
     public static class ApplicationDbContextSeed
     {
         public static async Task SeedAsync(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        {
+            //seed todo list
+            SeedToDoList(context);
+            SeedCitizenshipType(context);
+            await SeedDefaultUserAsync(userManager);
+
+
+            context.SaveChanges();
+        }
+
+        #region --- SeedMethods ---
+        private static void SeedCitizenshipType(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.CitizenshipType.Any())
+            {
+                CitizenshipType[] citizenshipTypes =
+                {
+                    new CitizenshipType { Name = "Cidadão Nacional", IsActive = true },
+                    new CitizenshipType { Name = "Residente Permanente", IsActive = true }
+                };
+                context.CitizenshipType.AddRange(citizenshipTypes);
+            }
+        }
+        private static void SeedToDoList(ApplicationDbContext context)
         {
             // Seed, if necessary
             if (!context.TodoLists.Any())
@@ -30,6 +56,10 @@ namespace CleanArchitecture.Infrastructure.Persistence
                 });
             }
 
+        }
+
+        private static async Task SeedDefaultUserAsync(UserManager<ApplicationUser> userManager)
+        {
             // Create default administrator
             var defaultUser = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
 
@@ -38,5 +68,7 @@ namespace CleanArchitecture.Infrastructure.Persistence
                 await userManager.CreateAsync(defaultUser, "Administrator1!");
             }
         }
+
+        #endregion --- SeedMethods ---
     }
 }

@@ -14,6 +14,11 @@ namespace CleanArchitecture.Infrastructure.Persistence
             //seed todo list
             SeedToDoList(context);
             SeedCitizenshipType(context);
+            SeedDocumentType(context);
+            SeedRelationship(context);
+            SeedVisitPurpose(context);
+            SeedStranded(context);
+            SeedHealthStatus(context);
             await SeedDefaultUserAsync(userManager);
 
 
@@ -21,6 +26,62 @@ namespace CleanArchitecture.Infrastructure.Persistence
         }
 
         #region --- SeedMethods ---
+
+        private static void SeedHealthStatus(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.HealthStatus.Any())
+            {
+                HealthStatus[] healthStatuses =
+                {
+                    new HealthStatus { Name = "Lockdown", IsActive = true },
+                    new HealthStatus { Name = "Quarentena", IsActive = true },
+                    new HealthStatus { Name = "Testou Positivo", IsActive = true },
+                    new HealthStatus { Name = "Falecido", IsActive = true }
+                };
+                context.HealthStatus.AddRange(healthStatuses);
+            }
+        }
+
+        private static void SeedStranded(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.Stranded.Any())
+            {
+                Stranded[] strandedList =
+                {
+                    new Stranded { Name = "Abrigo", IsActive = true },
+                    new Stranded { Name = "Aeroporto", IsActive = true },
+                    new Stranded { Name = "Hotel", IsActive = true },
+                    new Stranded { Name = "Férias", IsActive = true },
+                    new Stranded { Name = "Família ou Amigos", IsActive = true },
+                    new Stranded { Name = "Centro de  Acolhimento", IsActive = true },
+                    new Stranded { Name = "Others", IsActive = true }
+                };
+                context.Stranded.AddRange(strandedList);
+            }
+        }
+
+
+
+        private static void SeedVisitPurpose(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.Relationship.Any())
+            {
+                VisitPurpose[] visitPurposes =
+                {
+                    new VisitPurpose { Name = "Estudo", IsActive = true },
+                    new VisitPurpose { Name = "Trabalho", IsActive = true },
+                    new VisitPurpose { Name = "Férias", IsActive = true },
+                    new VisitPurpose { Name = "Turismo", IsActive = true },
+                    new VisitPurpose { Name = "Negócio", IsActive = true },
+                    new VisitPurpose { Name = "Others", IsActive = true }
+                };
+                context.VisitPurpose.AddRange(visitPurposes);
+            }
+        }
+
 
         private static void SeedRelationship(ApplicationDbContext context)
         {

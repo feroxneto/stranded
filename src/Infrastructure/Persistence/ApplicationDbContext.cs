@@ -33,6 +33,10 @@ namespace CleanArchitecture.Infrastructure.Persistence
         public DbSet <CitizenshipType> CitizenshipType { get; set; }
         public DbSet<DocumentType> DocumentType { get; set; }
         public DbSet<Relationship> Relationship { get; set; }
+        public DbSet<VisitPurpose> VisitPurpose { get; set; }
+        public DbSet<HealthStatus> HealthStatus { get; set; }
+        public DbSet<Stranded> Stranded { get; set; }
+
 
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

@@ -31,6 +31,8 @@ namespace CleanArchitecture.Infrastructure.Persistence
 
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet <CitizenshipType> CitizenshipType { get; set; }
+        public DbSet<DocumentType> DocumentType { get; set; }
+        public DbSet<Relationship> Relationship { get; set; }
 
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

@@ -21,6 +21,38 @@ namespace CleanArchitecture.Infrastructure.Persistence
         }
 
         #region --- SeedMethods ---
+
+        private static void SeedRelationship(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.Relationship.Any())
+            {
+                Relationship[] relationships =
+                {
+                    new Relationship { Name = "Esposo(a)", IsActive = true },
+                    new Relationship { Name = "Filho(a)", IsActive = true },
+                    new Relationship { Name = "Pai/Mãe", IsActive = true },
+                    new Relationship { Name = "Familía Extendida", IsActive = true },
+                    new Relationship { Name = "Amigo(a)", IsActive = true },
+                    new Relationship { Name = "Colega", IsActive = true }
+                };
+                context.Relationship.AddRange(relationships);
+            }
+        }
+
+        private static void SeedDocumentType(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.DocumentType.Any())
+            {
+                DocumentType[] documentTypes =
+                {
+                    new DocumentType { Name = "Bilhete de Identidade", IsActive = true },
+                    new DocumentType { Name = "Passaport", IsActive = true }
+                };
+                context.DocumentType.AddRange(documentTypes);
+            }
+        }
         private static void SeedCitizenshipType(ApplicationDbContext context)
         {
             // Seed, if necessary

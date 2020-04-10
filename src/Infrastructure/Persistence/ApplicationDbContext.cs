@@ -36,8 +36,10 @@ namespace CleanArchitecture.Infrastructure.Persistence
         public DbSet<VisitPurpose> VisitPurpose { get; set; }
         public DbSet<HealthStatus> HealthStatus { get; set; }
         public DbSet<Stranded> Stranded { get; set; }
-        //public DbSet<Institution> Institution { get; set; }
         public DbSet<Notification> Notification { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Institution> Institution { get; set; }
 
 
 

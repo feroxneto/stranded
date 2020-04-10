@@ -6,8 +6,4 @@
     <AssemblyName>CleanArchitecture.Domain</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Entities\Institution.cs" />
-  </ItemGroup>
-
 </Project>

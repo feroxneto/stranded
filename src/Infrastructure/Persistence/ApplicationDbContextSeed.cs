@@ -21,7 +21,8 @@ namespace CleanArchitecture.Infrastructure.Persistence
             SeedStranded(context);
             SeedHealthStatus(context);
             SeedNotification(context);
-            SeedInstitution(context);
+            SeedCountryCIty(context);
+            //SeedInstitution(context); 
             await SeedDefaultUserAsync(userManager); 
 
             context.SaveChanges();
@@ -31,18 +32,124 @@ namespace CleanArchitecture.Infrastructure.Persistence
 
         private static void SeedInstitution(ApplicationDbContext context)
         {
+
             //// Seed, if necessary
-            //if (!context.Institution.Any())
-            //{
-            //    Institution[] institutions =
-            //    {
-            //        new Institution { Name = "Lockdown", IsActive = true },
-            //        new Institution { Name = "Quarentena", IsActive = true },
-            //        new Institution { Name = "Testou Positivo", IsActive = true },
-            //        new Institution { Name = "Falecido", IsActive = true }
-            //    };
-            //    context.Institution.AddRange(institutions);
-            //}
+            if (!context.Institution.Any())
+            {
+
+                long SAId = 0;
+                long AOId = 0; 
+                long PTId = 0;
+                long BRId = 0; 
+                long MZId = 0;
+                IList<Country> countries = context.Country.ToList();
+                foreach (var item in countries)
+                {
+                    switch (item.Name) {
+                        case "África do Sul": { SAId = item.Id; break; }
+                        case "Angola": { AOId = item.Id; break; }
+                        case "Brasil": { PTId = item.Id; break; }
+                        case "Moçambique": {  MZId= item.Id; break; }
+                        case "Portugal": { BRId = item.Id; break; }
+                    }
+                }
+                Institution[] institutions =
+                {  
+
+                    new Institution { Name = "Embaixada de Portugal em Luanda", CountryId = AOId, IsActive = true },
+                    new Institution { Name = "Embaixada de Moçambique em Angola", CountryId = MZId, IsActive = true },
+                    new Institution { Name = "Embaixada de do Brasil em Angola", CountryId = BRId, IsActive = true },
+                    new Institution { Name = "Consulado de Angola em Cape Town", CountryId = SAId, IsActive = true }
+                };
+                context.Institution.AddRange(institutions);
+            }
+        }
+
+        private static void SeedCountryCIty(ApplicationDbContext context)
+        {
+            // Seed, if necessary
+            if (!context.Country.Any())
+            {
+                List<Country> countries = new List<Country>();
+                countries.Add(new Country
+                {
+                    Name = "África do Sul",
+                    CityList =
+                        {
+                            new City { Name = "Johannesburg",  IsActive = true },
+                            new City { Name = "Pretoria",  IsActive = true },
+                            new City { Name = "Durban",  IsActive = true },
+                            new City { Name = "Cape Town",  IsActive = true },
+                            new City { Name = "Kimberly",  IsActive = true },
+                            new City { Name = "Porth Elizabeth",  IsActive = true }
+                        }
+                });
+                countries.Add(new Country
+                {
+                    Name = "Angola",
+                    CityList =
+                        {
+                            new City { Name = "Caxito",  IsActive = true },
+                            new City { Name = "Benguela",  IsActive = true },
+                            new City { Name = "Kuito",  IsActive = true },
+                            new City { Name = "Cabinda",  IsActive = true },
+                            new City { Name = "Menonge",  IsActive = true },
+                            new City { Name = "N'dalatando",  IsActive = true },
+                            new City { Name = "Sumbe",  IsActive = true },
+                            new City { Name = "Ondjiva",  IsActive = true },
+                            new City { Name = "Huambo",  IsActive = true },
+                            new City { Name = "Kilamba",  IsActive = false },
+                            new City { Name = "Lubango",  IsActive = true },
+                            new City { Name = "Dundo",  IsActive = true },
+                            new City { Name = "Saurimo",  IsActive = true },
+                            new City { Name = "Malange",  IsActive = true },
+                            new City { Name = "Luena",  IsActive = true },
+                            new City { Name = "Moaçamedes",  IsActive = true },
+                            new City { Name = "Uíge",  IsActive = true },
+                            new City { Name = "Mbanza Congo",  IsActive = true },
+                            new City { Name = "Lobito",  IsActive = true },
+                            new City { Name = "Andulo",  IsActive = true },
+                        }
+                });
+                countries.Add(new Country
+                {
+                    Name = "Brasil",
+                    CityList =
+                        {
+                            new City { Name = "São Paulo",  IsActive = true },
+                            new City { Name = "Rio de Janeiro",  IsActive = true },
+                            new City { Name = "Brasilia",  IsActive = true },
+                            new City { Name = "Bahia",  IsActive = true },
+                            new City { Name = "Belo Horizonte",  IsActive = true },
+                            new City { Name = "Mato Grosso",  IsActive = true }
+                        }
+                });
+                countries.Add(new Country
+                {
+                    Name = "Moçambique",
+                    CityList =
+                        {
+                            new City { Name = "Maputo",  IsActive = true },
+                            new City { Name = "Gaza",  IsActive = true },
+                            new City { Name = "Niassa",  IsActive = true },
+                            new City { Name = "Cabo Delgado",  IsActive = true },
+                            new City { Name = "Nampula",  IsActive = true }
+                        }
+                });
+                countries.Add(new Country
+                {
+                    Name = "Portugal",
+                    CityList =
+                        {
+                            new City { Name = "Lisboa",  IsActive = true },
+                            new City { Name = "Porto",  IsActive = true }
+                        }
+                });
+
+                context.Country.AddRange(countries);
+
+            }
+
         }
         private static void SeedNotification(ApplicationDbContext context)
         {
@@ -95,7 +202,7 @@ namespace CleanArchitecture.Infrastructure.Persistence
         private static void SeedVisitPurpose(ApplicationDbContext context)
         {
             // Seed, if necessary
-            if (!context.Relationship.Any())
+            if (!context.VisitPurpose.Any())
             {
                 VisitPurpose[] visitPurposes =
                 {

@@ -7,9 +7,9 @@ using System.Text;
 
 namespace CleanArchitecture.Infrastructure.Persistence.Configurations
 {
-    class RelationshipConfiguration : IEntityTypeConfiguration<Relationship>
+    class RelationshipTypeConfiguration : IEntityTypeConfiguration<RelationshipType>
     {
-        public void Configure(EntityTypeBuilder<Relationship> builder)
+        public void Configure(EntityTypeBuilder<RelationshipType> builder)
         {
             builder.Property(t => t.Name)
                 .HasMaxLength(50)

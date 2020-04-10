@@ -18,6 +18,7 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
             builder.Property(t => t.IsActive)
                .HasDefaultValue(true)
                .IsRequired();
+
         }
     }
 }

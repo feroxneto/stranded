@@ -11,6 +11,9 @@ namespace CleanArchitecture.Domain.Entities
         {
             CityList = new List<City>();
             InstitutionList = new List<Institution>();
+            CitizenList = new List<Citizen>();
+            LockedOutCitizenList = new List<Citizen>();
+            NextOfKinList = new List<NextOfKin>();
         }   
         
         public long Id { get; set; }
@@ -18,6 +21,9 @@ namespace CleanArchitecture.Domain.Entities
         public bool IsActive { get; set; }
         public IList<City> CityList { get; set; }
         public IList<Institution> InstitutionList { get; set; }
+        public IList<Citizen> CitizenList { get; set; }
+        public IList<Citizen> LockedOutCitizenList { get; set; }
+        public IList<NextOfKin> NextOfKinList { get; set; }
 
     }
 }

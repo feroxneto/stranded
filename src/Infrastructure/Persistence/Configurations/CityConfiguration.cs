@@ -15,8 +15,11 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
                 .HasMaxLength(50)
                 .IsRequired();
 
-            builder.Property(t => t.CountryId)
-               .IsRequired();
+            builder.HasOne(c=>c.Country)
+                .WithMany(c=>c.CityList)
+                .HasForeignKey(t => t.CountryId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(t => t.IsActive)
                .HasDefaultValue(true)

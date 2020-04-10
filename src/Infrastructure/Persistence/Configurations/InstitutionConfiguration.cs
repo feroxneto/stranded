@@ -15,10 +15,10 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
                 .HasMaxLength(250)
                 .IsRequired();
 
-            builder.Property(t => t.Telefone)
+            builder.Property(t => t.PhoneNumber)
                 .HasMaxLength(20);
 
-            builder.Property(t => t.TelefoneOther)
+            builder.Property(t => t.PhoneNumberOther)
                 .HasMaxLength(20);
 
 
@@ -27,10 +27,7 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
 
             builder.Property(t => t.Note)
                .HasMaxLength(500);
-
-            builder.Property(t => t.TelefoneOther)
-                .HasMaxLength(20);
-
+             
             builder.HasOne(t => t.Country)
                 .WithMany(i=>i.InstitutionList).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(t => t.City)

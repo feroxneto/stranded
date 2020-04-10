@@ -32,7 +32,7 @@ namespace CleanArchitecture.Infrastructure.Persistence
         public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet <CitizenshipType> CitizenshipType { get; set; }
         public DbSet<DocumentType> DocumentType { get; set; }
-        public DbSet<Relationship> Relationship { get; set; }
+        public DbSet<RelationshipType> Relationship { get; set; }
         public DbSet<VisitPurpose> VisitPurpose { get; set; }
         public DbSet<HealthStatus> HealthStatus { get; set; }
         public DbSet<Stranded> Stranded { get; set; }
@@ -40,6 +40,12 @@ namespace CleanArchitecture.Infrastructure.Persistence
         public DbSet<Country> Country { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Institution> Institution { get; set; }
+
+        public DbSet<Attachment> Attachment { get; set; }
+        public DbSet<Citizen> Citizen { get; set; }
+        public DbSet<NextOfKin> NextOfKin { get; set; }
+        public DbSet<TravelingInfo> TravelingInfo { get; set; } 
+
 
 
 

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CleanArchitecture.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace CleanArchitecture.Domain.Entities
 {
-    public class Notification
+    public class Notification : AuditableEntity
     {
         public long Id { get; set; }
         public string Title { get; set; }

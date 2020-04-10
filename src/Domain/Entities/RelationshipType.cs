@@ -5,16 +5,15 @@ using System.Text;
 
 namespace CleanArchitecture.Domain.Entities
 {
-    public class HealthStatus : AuditableEntity
+    public class RelationshipType : AuditableEntity
     {
-        public HealthStatus()
+        public RelationshipType()
         {
-            CitizenList = new List<Citizen>();
+            NextOfKinList = new List<NextOfKin>();
         }
         public long Id { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
-
-        public IList<Citizen> CitizenList { get; set; }
+        public IList<NextOfKin> NextOfKinList { get; set; }
     }
 }

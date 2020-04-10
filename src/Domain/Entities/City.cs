@@ -8,6 +8,8 @@ namespace CleanArchitecture.Domain.Entities
         public City()
         {
             InstitutionList = new List<Institution>();
+            LockedOutCitizenList = new List<Citizen>();
+            TravelingInfoList = new List<TravelingInfo>();
         }
         public long Id { get; set; }
         public string Name { get; set; }
@@ -15,5 +17,7 @@ namespace CleanArchitecture.Domain.Entities
         public bool IsActive { get; set; }
         public Country Country { get; set; }
         public IList<Institution> InstitutionList { get; set; }
+        public IList<Citizen> LockedOutCitizenList { get; set; }
+        public IList<TravelingInfo> TravelingInfoList { get; set; }
     }
 }

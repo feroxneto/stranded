@@ -16,6 +16,7 @@ namespace CleanArchitecture.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(t => t.Message)
+                .HasColumnType("text")
                 .IsRequired();
 
             builder.Property(t => t.IsActive)

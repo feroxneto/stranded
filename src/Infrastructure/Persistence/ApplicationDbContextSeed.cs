@@ -22,13 +22,53 @@ namespace CleanArchitecture.Infrastructure.Persistence
             SeedHealthStatus(context);
             SeedNotification(context);
             SeedCountryCIty(context);
-            //SeedInstitution(context); 
-            await SeedDefaultUserAsync(userManager); 
-
+            await SeedDefaultUserAsync(userManager);
             context.SaveChanges();
+
+            SeedInstitution(context);
+            context.SaveChanges();
+
+
+
         }
 
         #region --- SeedMethods ---
+        private static void SeedCitizen(ApplicationDbContext context)
+        {
+
+            //// Seed, if necessary
+            if (!context.Citizen.Any())
+            {
+
+                long SAId = 0;
+                long AOId = 0;
+                long PTId = 0;
+                long BRId = 0;
+                long MZId = 0;
+                IList<Country> countries = context.Country.ToList();
+                foreach (var item in countries)
+                {
+                    switch (item.Name)
+                    {
+                        case "África do Sul": { SAId = item.Id; break; }
+                        case "Angola": { AOId = item.Id; break; }
+                        case "Brasil": { PTId = item.Id; break; }
+                        case "Moçambique": { MZId = item.Id; break; }
+                        case "Portugal": { BRId = item.Id; break; }
+                    }
+                }
+                Institution[] institutions =
+                {
+
+                    new Institution { Name = "Embaixada de Portugal em Luanda", CountryId = AOId, IsActive = true },
+                    new Institution { Name = "Embaixada de Moçambique em Angola", CountryId = MZId, IsActive = true },
+                    new Institution { Name = "Embaixada de do Brasil em Angola", CountryId = BRId, IsActive = true },
+                    new Institution { Name = "Consulado de Angola em Cape Town", CountryId = SAId, IsActive = true }
+                };
+                //context.Citizen.AddRange(institutions);
+            }
+        }
+
 
         private static void SeedInstitution(ApplicationDbContext context)
         {
@@ -221,14 +261,14 @@ namespace CleanArchitecture.Infrastructure.Persistence
             // Seed, if necessary
             if (!context.Relationship.Any())
             {
-                Relationship[] relationships =
+                RelationshipType[] relationships =
                 {
-                    new Relationship { Name = "Esposo(a)", IsActive = true },
-                    new Relationship { Name = "Filho(a)", IsActive = true },
-                    new Relationship { Name = "Pai/Mãe", IsActive = true },
-                    new Relationship { Name = "Familía Extendida", IsActive = true },
-                    new Relationship { Name = "Amigo(a)", IsActive = true },
-                    new Relationship { Name = "Colega", IsActive = true }
+                    new RelationshipType { Name = "Esposo(a)", IsActive = true },
+                    new RelationshipType { Name = "Filho(a)", IsActive = true },
+                    new RelationshipType { Name = "Pai/Mãe", IsActive = true },
+                    new RelationshipType { Name = "Familía Extendida", IsActive = true },
+                    new RelationshipType { Name = "Amigo(a)", IsActive = true },
+                    new RelationshipType { Name = "Colega", IsActive = true }
                 };
                 context.Relationship.AddRange(relationships);
             }
